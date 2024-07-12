@@ -1,9 +1,9 @@
 <?php
-/** op-unit-model:/index.php
+/** op-unit-qql:/index.php
  *
  * @created     2023-01-30
  * @version     1.0
- * @package     op-unit-model
+ * @package     op-unit-qql
  * @author      Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright   Tomoaki Nagahara All right reserved.
  */
@@ -21,4 +21,4 @@ namespace OP;
 /** Include
  *
  */
-require_once(__DIR__.'/Model.class.php');
+require_once(__DIR__.'/QQL.class.php');

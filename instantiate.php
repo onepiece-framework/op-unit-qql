@@ -1,9 +1,9 @@
 <?php
-/** op-unit-model:/instantiate.php
+/** op-unit-qql:/instantiate.php
  *
  * @created     2024-03-19
  * @version     1.0
- * @package     op-unit-model
+ * @package     op-unit-qql
  * @author      Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright   Tomoaki Nagahara All right reserved.
  */
@@ -21,9 +21,9 @@ namespace OP\UNIT;
 /** Include
  *
  */
-require_once(__DIR__.'/Model.class.php');
+require_once(__DIR__.'/QQL.class.php');
 
 /** Return instance
  *
  */
-return new \OP\UNIT\Model();
+return new \OP\UNIT\QQL();
