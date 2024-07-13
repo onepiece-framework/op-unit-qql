@@ -164,4 +164,38 @@ class QQL implements IF_UNIT, IF_QQL
 			return self::Insert($table, $set);
 		}
 	}
+
+	/** Insert
+	 *
+	 * @created    2024-07-13
+	 * @param      string     $table
+	 * @param      array      $set
+	 * @return     int        $ai is auto increment id
+	 */
+	static public function Insert(string $qql, array $set)
+	{
+		//	...
+		$fields = array_keys($set);
+		$quote  = include(__DIR__.'/include/quote.php' );
+		$TABLE  = include(__DIR__.'/include/table.php' );
+		$FIELDS = include(__DIR__.'/include/fields.php');
+		$VALUES = include(__DIR__.'/include/values.php');
+		unset($fields, $quote);
+
+		try{
+			//	...
+			$sql  = "INSERT INTO {$TABLE} ($FIELDS) VALUES ($VALUES)";
+			$stmt = self::$_PDOs[ self::$_hash ] -> prepare($sql);
+			$stmt->execute($set);
+
+			//	...
+			return (int)self::$_PDOs[ self::$_hash ] -> lastInsertId();
+
+		}catch( \PDOException $e ){
+			//	...
+			self::_Error($e);
+			//	...
+			return false;
+		}
+	}
 }
