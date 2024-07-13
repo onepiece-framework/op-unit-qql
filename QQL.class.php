@@ -1,11 +1,11 @@
 <?php
 /** op-unit-qql:/QQL.class.php
  *
- * @created     2024-07-12
- * @version     1.0
- * @package     op-unit-qql
- * @author      Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
- * @copyright   Tomoaki Nagahara All right reserved.
+ * @created    2024-07-12
+ * @version    1.0
+ * @package    op-unit-qql
+ * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
+ * @copyright  Tomoaki Nagahara All right reserved.
  */
 
 /** Declare strict
@@ -27,11 +27,11 @@ use OP\OP_CI;
 
 /** QQL
  *
- * @created     2024-07-12
- * @version     1.0
- * @package     op-unit-qql
- * @author      Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
- * @copyright   Tomoaki Nagahara All right reserved.
+ * @created    2024-07-12
+ * @version    1.0
+ * @package    op-unit-qql
+ * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
+ * @copyright  Tomoaki Nagahara All right reserved.
  */
 class QQL implements IF_UNIT
 {
