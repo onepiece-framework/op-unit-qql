@@ -30,4 +30,16 @@ $result = $arg1 . $arg2;
 $ci->Set($method, $result, $args);
 
 //	...
+$path = 'ci/QQL.sqlite3';
+$hash = OP()->Unit()->QQL()->Open( $path );
+foreach( OP()->Unit()->QQL()->Get(' sqlite_sequence ', [], ['limit'=>-1]) as $record ){
+	$sequence[$record['name']] = $record['seq'];
+}
+
+//	...
+$method = 'Open';
+$args   = $path;
+$result = $hash;
+$ci->Set($method, $result, $args);
+//	...
 return $ci->Get();
