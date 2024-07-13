@@ -235,4 +235,37 @@ class QQL implements IF_UNIT, IF_QQL
 			return false;
 		}
 	}
+
+	/** Select
+	 *
+	 * @created    2024-07-14
+	 * @param      string     $qql
+	 * @param      array      $where
+	 * @param      array      $option
+	 * @return     array      $record
+	 */
+	static public function Get(string $qql, array $where=[], array $option=[]) : array
+	{
+		//	...
+		$quote  = include(__DIR__.'/include/quote.php' );
+		$parsed = include(__DIR__.'/include/parser.php');
+		$OPTION = include(__DIR__.'/include/option.php');
+
+		//	...
+		$sql = "SELECT {$parsed['FIELD']} FROM {$parsed['TABLE']} {$parsed['WHERE']} {$OPTION}";
+
+		//	...
+		$stmt = self::$_PDOs[ self::$_hash ] -> prepare($sql);
+		$stmt -> execute( $where );
+
+		//	...
+		if( $option['limit'] == 1 ){
+			return $stmt->fetchAll(\PDO::FETCH_ASSOC)[0];
+		}else{
+			return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+
+		//	for Eclipse notice.
+		if( 0 ){ D($quote); }
+	}
 }
