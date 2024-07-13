@@ -82,5 +82,18 @@ $where = [
 $args   = ['t_user', $set, $where];
 $result =  1;
 $ci->Set($method, $result, $args);
+
+//	...
+$method = 'Get';
+$args   = "t_user.ai = {$user_ai}";
+$result = [
+	'ai'        => $user_ai,
+	'name'      => $user_name,
+	'group'     => $group_ai,
+	'age'       => 2,
+	'timestamp' => gmdate(_OP_DATE_TIME_),
+];
+$ci->Set($method, $result, $args);
+
 //	...
 return $ci->Get();
