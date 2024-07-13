@@ -57,5 +57,18 @@ $set = [
 $args   = ['t_group', $set];
 $result = $group_ai;
 $ci->Set($method, $result, $args);
+
+//	...
+$method = 'Insert';
+$user_ai   = $sequence['t_user'] +1;
+$user_name = 'user_'.$user_ai;
+$set = [
+	'name'  => $user_name,
+	'group' => $group_ai,
+	'age'   => 1,
+];
+$args   = ['t_user', $set];
+$result = $user_ai;
+$ci->Set($method, $result, $args);
 //	...
 return $ci->Get();
