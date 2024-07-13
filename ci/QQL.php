@@ -47,5 +47,15 @@ $method = 'Close';
 $args   = $hash;
 $result =  null;
 $ci->Set($method, $result, $args);
+
+//	...
+$method = 'Set';
+$group_ai = $sequence['t_group'] +1;
+$set = [
+	'name' => 'group_'.$group_ai,
+];
+$args   = ['t_group', $set];
+$result = $group_ai;
+$ci->Set($method, $result, $args);
 //	...
 return $ci->Get();
