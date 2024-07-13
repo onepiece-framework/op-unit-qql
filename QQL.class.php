@@ -133,4 +133,35 @@ class QQL implements IF_UNIT, IF_QQL
 	{
 
 	}
+
+	/** Set data to database
+	 *
+	 * @created    2024-07-13
+	 * @param      string     $table
+	 * @param      array      $set
+	 * @param      array      $where
+	 * @param      array      $option
+	 * @return     int
+	 */
+	static public function Set(string $table, array $set, array $where=[], array $option=[]) : int
+	{
+		//	...
+		if( empty($table) ){
+			OP()->Notice("table name is empty");
+			return 0;
+		}
+
+		//	...
+		if( empty($set) ){
+			OP()->Notice("SET is empty");
+			return 0;
+		}
+
+		//	...
+		if( $where ){
+			return self::Update($table, $set, $where, $option);
+		}else{
+			return self::Insert($table, $set);
+		}
+	}
 }
