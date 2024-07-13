@@ -24,6 +24,7 @@ namespace OP\UNIT;
 use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_CI;
+use OP\IF_QQL;
 
 /** QQL
  *
@@ -33,7 +34,10 @@ use OP\OP_CI;
  * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright  Tomoaki Nagahara All right reserved.
  */
-class QQL implements IF_UNIT
+class QQL implements IF_UNIT, IF_QQL
 {
+	/** use
+	 *
+	 */
 	use OP_CORE, OP_CI;
 }
