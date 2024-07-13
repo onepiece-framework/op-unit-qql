@@ -41,5 +41,11 @@ $method = 'Open';
 $args   = $path;
 $result = $hash;
 $ci->Set($method, $result, $args);
+
+//	...
+$method = 'Close';
+$args   = $hash;
+$result =  null;
+$ci->Set($method, $result, $args);
 //	...
 return $ci->Get();

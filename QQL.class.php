@@ -122,4 +122,15 @@ class QQL implements IF_UNIT, IF_QQL
 		//	...
 		return self::$_hash;
 	}
+
+	/** Close database resource.
+	 *
+	 * @created    2024-07-13
+	 * @param      string     $hash
+	 * @return     boolean
+	 */
+	static public function Close(string $hash='')
+	{
+
+	}
 }
