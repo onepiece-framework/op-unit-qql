@@ -70,5 +70,17 @@ $set = [
 $args   = ['t_user', $set];
 $result = $user_ai;
 $ci->Set($method, $result, $args);
+
+//	...
+$method = 'Update';
+$set = [
+	'age' => 2,
+];
+$where = [
+	'ai' => $user_ai,
+];
+$args   = ['t_user', $set, $where];
+$result =  1;
+$ci->Set($method, $result, $args);
 //	...
 return $ci->Get();

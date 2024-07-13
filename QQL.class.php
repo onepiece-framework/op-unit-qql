@@ -198,4 +198,41 @@ class QQL implements IF_UNIT, IF_QQL
 			return false;
 		}
 	}
+
+	/** Update
+	 *
+	 * @created    2024-07-14
+	 * @param      string     $table
+	 * @param      array      $set
+	 * @param      array      $where
+	 * @param      array      $option
+	 * @return     int        $number of update record
+	 */
+	static public function Update(string $qql, array $set, array $where=[], array $option=[])
+	{
+		//	...
+		$quote = include(__DIR__.'/include/quote.php');
+		$TABLE = include(__DIR__.'/include/table.php');
+		$SET   = include(__DIR__.'/include/set.php'  );
+		$WHERE = include(__DIR__.'/include/where.php');
+		$LIMIT = include(__DIR__.'/include/limit.php');
+		unset($quote);
+
+		//	...
+		$sql = "UPDATE {$TABLE} SET {$SET} WHERE {$WHERE} {$LIMIT}";
+
+		try{
+			//	...
+			$stmt = self::$_PDOs[ self::$_hash ] -> prepare($sql);
+			$stmt -> execute( array_merge_recursive( $set, $where ) );
+			//	...
+			return $stmt -> rowCount();
+
+		}catch( \PDOException $e ){
+			//	...
+			self::_Error($e);
+			//	...
+			return false;
+		}
+	}
 }
