@@ -96,4 +96,16 @@ $result = [
 $ci->Set($method, $result, $args);
 
 //	...
+$method = '_Error';
+$args   =  null;
+$result =  null;
+$ci->Set($method, $result, $args);
+
+//	...
+$method = 'Error';
+$args   =  null;
+$result = '';
+$ci->Set($method, $result, $args);
+
+//	...
 return $ci->Get();
