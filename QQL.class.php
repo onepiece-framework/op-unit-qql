@@ -268,4 +268,36 @@ class QQL implements IF_UNIT, IF_QQL
 		//	for Eclipse notice.
 		if( 0 ){ D($quote); }
 	}
+
+	/** Stack errors
+	 *
+	 * @created    2024-07-13
+	 * @var        array
+	 */
+	static $_errors;
+
+	/** Stack errors
+	 *
+	 * @created    2024-07-13
+	 */
+	static private function _Error()
+	{
+		//	...
+		$error = self::$_PDOs[ self::$_hash ]->errorInfo();
+
+		//	...
+		if( $error[2] ){
+			self::$_errors[] = "SQLSTATE: {$error[0]} - [$error[1]] $error[2]";
+		}
+	}
+
+	/** Return stacked errors
+	 *
+	 * @created    2024-07-13
+	 * @return     array
+	 */
+	static public function Error() : string
+	{
+		return empty(self::$_errors) ? '': array_shift( self::$_errors );
+	}
 }
