@@ -1,8 +1,24 @@
-op-unit-qql
+QQL is Quick Query Language
 ===
 
-# Init
+# Supported
 
-```sh
-php ./init.php 2024
-```
+ * Open
+ * Insert
+ * Update
+ * Select
+ * Where
+ * Join
+ * Limit
+ * Offset
+ * Pager
+
+# Not Supported
+
+ * Delete
+ * Where
+	 * Or
+ * Join
+	 * Right
+	 * Inner
+	 * Outer
