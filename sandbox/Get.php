@@ -22,5 +22,24 @@ namespace OP\UNIT\QQL;
 include('Open.php');
 
 //	...
-$record = OP()->Unit()->QQL()->Get(' t_user.ai = 1 ');
+if( $table = OP()->Request('table') ){
+	$qql = $table;
+}else{
+	D('Empty table.');
+	return;
+}
+
+//	...
+if(!$field = OP()->Request('field') ){
+	D('Empty field.');
+}else
+if(!$value = OP()->Request('value') ){
+	D('Empty value.');
+}else{
+	//	...
+	$qql = " {$table}.{$field} = {$value} ";
+}
+
+//	...
+$record = OP()->Unit()->QQL()->Get($qql, [], ['limit'=>-1]);
 D($record);

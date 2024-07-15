@@ -252,7 +252,7 @@ class QQL implements IF_UNIT, IF_QQL
 	 * @param      array      $option
 	 * @return     array      $record
 	 */
-	static public function Get(string $qql, array $where=[], array $option=[]) : array
+	static public function Get(string $qql, array $where=[], array $option=[])
 	{
 		//	...
 		$get    = true;
@@ -266,16 +266,24 @@ class QQL implements IF_UNIT, IF_QQL
 		//	...
 		$stmt = self::$_PDOs[ self::$_hash ] -> prepare($sql);
 		$stmt -> execute( $where );
+		$records = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 		//	...
 		if( $option['limit'] == 1 ){
-			return $stmt->fetchAll(\PDO::FETCH_ASSOC)[0];
-		}else{
-			return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+			//	...
+			$records = $records[0] ?? null;
+
+			//	...
+			if( count($parsed['FIELDs'] ?? []) === 1 ){
+				$records = $records[ $parsed['FIELDs'][0] ] ?? null;
+			}
 		}
 
 		//	...
 		unset($get, $quote);
+
+		//	...
+		return $records;
 	}
 
 	/** Stack errors
