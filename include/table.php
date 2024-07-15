@@ -22,4 +22,7 @@ namespace OP\UNIT\QQL;
 /* @var $table string */
 
 //	...
+$table = trim($table);
+
+//	...
 return "{$quote}{$table}{$quote}";
