@@ -25,4 +25,9 @@ namespace OP\UNIT\QQL;
 $table = trim($table);
 
 //	...
+if( strpos($table, '+') ){
+	return include(__DIR__.'/join.php');
+}
+
+//	...
 return "{$quote}{$table}{$quote}";
