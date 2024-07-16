@@ -97,7 +97,7 @@ $ci->Set($method, $result, $args);
 
 //	...
 $method = '_Error';
-$args   =  null;
+$args   =  new \PDOException();
 $result =  null;
 $ci->Set($method, $result, $args);
 
