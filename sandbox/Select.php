@@ -22,11 +22,13 @@ namespace OP\UNIT\QQL;
 include('Open.php');
 
 //	...
-$option = [
-//	'limit' => 10
-];
-$where = [
-//	'ai' => 2,
-];
-$record = OP()->Unit()->QQL()->Get(' ai, name <- t_user ', $where, $option);
+$qql = ' t_user ';
+$record = OP()->Unit()->QQL()->Get($qql, [], ['limit'=>-1]);
+OP()->Html($qql);
+D($record);
+
+//	...
+$qql = ' t_group ';
+$record = OP()->Unit()->QQL()->Get($qql, [], ['limit'=>-1]);
+OP()->Html($qql);
 D($record);
