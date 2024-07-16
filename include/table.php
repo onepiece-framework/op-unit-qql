@@ -18,16 +18,25 @@ declare(strict_types=1);
  */
 namespace OP\UNIT\QQL;
 
+/* @var $qql   string */
 /* @var $quote string */
-/* @var $table string */
 
 //	...
-$table = trim($table);
+$table = trim($qql);
 
-//	...
+//	t_user.group + t_group.id = 1
 if( strpos($table, '+') ){
 	return include(__DIR__.'/join.php');
+}else
+//	t_user:u
+if( strpos($table, ':') ){
+	return include(__DIR__.'/asTable.php');
+}else
+//	t_table.id = 1 --> t_table.id --> "t_table"
+if( $pos = strpos($table, '.') ){
+	$tbl = substr($table, 0, $pos);
+	return $quote . trim($tbl) . $quote;
 }
 
 //	...
-return "{$quote}{$table}{$quote}";
+return $quote . $table . $quote;
