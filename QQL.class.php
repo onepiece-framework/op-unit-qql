@@ -280,15 +280,21 @@ class QQL implements IF_UNIT, IF_QQL
 	 *
 	 * @created    2024-07-13
 	 */
-	static private function _Error()
+	static private function _Error( \PDOException $e )
 	{
 		//	...
-		$error = self::$_PDOs[ self::$_hash ]->errorInfo();
+		$code    = $e->getCode();
+		$message = $e->getMessage();
 
 		//	...
-		if( $error[2] ){
-			self::$_errors[] = "SQLSTATE: {$error[0]} - [$error[1]] $error[2]";
+		switch( $code ){
+			case 'HY000':
+				OP()->Notice("Does not match where field.");
+				break;
 		}
+
+		//	...
+		self::$_errors[] = $message;
 	}
 
 	/** Return stacked errors
