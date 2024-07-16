@@ -264,6 +264,9 @@ class QQL implements IF_UNIT, IF_QQL
 		$sql = "SELECT {$parsed['FIELD']} FROM {$parsed['TABLE']} {$parsed['WHERE']} {$OPTION}";
 
 		//	...
+		try{
+
+		//	...
 		$stmt = self::$_PDOs[ self::$_hash ] -> prepare($sql);
 		$stmt -> execute( $where );
 		$records = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -279,11 +282,15 @@ class QQL implements IF_UNIT, IF_QQL
 			}
 		}
 
+		}catch( \PDOException $e ){
+			self::_Error($e);
+		}
+
 		//	...
 		unset($get, $quote);
 
 		//	...
-		return $records;
+		return $records ?? null;
 	}
 
 	/** Stack errors
