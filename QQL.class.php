@@ -143,10 +143,10 @@ class QQL implements IF_UNIT, IF_QQL
 	 * @param      array      $option
 	 * @return     int
 	 */
-	static public function Set(string $table, array $set, array $where=[], array $option=[]) : int
+	static public function Set(string $qql, array $set, array $where=[], array $option=[]) : int
 	{
 		//	...
-		if( empty($table) ){
+		if( empty($qql) ){
 			OP()->Notice("table name is empty");
 			return 0;
 		}
@@ -158,10 +158,18 @@ class QQL implements IF_UNIT, IF_QQL
 		}
 
 		//	...
+		if( strpos($qql, '=') ){
+			$quote  = include(__DIR__.'/include/quote.php' );
+			$parsed = include(__DIR__.'/include/parser.php');
+			$qql = trim($parsed['TABLE'], $quote);
+			unset($quote);
+		}
+
+		//	...
 		if( $where ){
-			return self::Update($table, $set, $where, $option);
+			return self::Update($qql, $set, $where, $option);
 		}else{
-			return self::Insert($table, $set);
+			return self::Insert($qql, $set);
 		}
 	}
 
