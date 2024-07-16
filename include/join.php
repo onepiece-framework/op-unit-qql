@@ -35,16 +35,18 @@ foreach( explode('+', $table) as $temp ){
 		$als = substr($tbl, $pos +1);
 		$tbl = substr($tbl, 0, $pos);
 		//	"t_table" AS "t"
-		$tbl = $quote . trim($tbl) . $quote . ' AS ' . $quote . trim($als) . $quote;
+		$als = $quote . trim($als) . $quote;
+		$tbl = $quote . trim($tbl) . $quote . ' AS ' . $als;
 	}else{
 		$tbl = $quote . trim($tbl) . $quote;
+		$als = $tbl;
 	}
 
 	//	field
 	$fld = $quote . trim($fld) . $quote;
 
-	//	t_table:t , id --> "t_table:t"."id"
-	$on = $quote . $als . $quote .'.'. $fld;
+	//	"t"."id"
+	$on = $als .'.'. $fld;
 
 	//	...
 	if(!$ON ){

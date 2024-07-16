@@ -29,5 +29,7 @@ $where = [
 //	'ai' => 2,
 ];
 //	...
-$record = OP()->Unit()->QQL()->Get(' t_user.ai as ai, t_user.name as name, t_group.name as group, age <- t_user.group + t_group.ai ', $where, $option);
+$qql = ' u.ai, u.name, g.name:group, age, u.timestamp <- t_user:u.group + t_group:g.ai ';
+$record = OP()->Unit()->QQL()->Get($qql, $where, $option);
+OP()->Html($qql);
 D($record);
