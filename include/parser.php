@@ -39,7 +39,15 @@ if( $pos = strpos($qql, '<-') ){
 	//	...
 	$join = [];
 	foreach( explode(',', $fld) as $field ){
-		$join[] = $quote . trim($field) . $quote;
+		//	...
+		$field = trim($field);
+		//	...
+		if( $pos = strpos($field, ' as ') ){
+			$join[] = include(__DIR__.'/as.php');
+		}else{
+			$parse['FIELDs'][] = $field;
+			$join[] = $quote . $field . $quote;
+		}
 	}
 	$parse['FIELD'] = join(', ', $join);
 }
@@ -65,9 +73,12 @@ if( $pos = strpos($qql, '= ') ){
 }
 
 //	...
-$parse['TABLE'] = $quote . $table . $quote;
+$parse['TABLE'] = include(__DIR__.'/table.php');
 
-//	...
+/* @var $get bool */
+if( empty($get) ){
+	//	...
+}else
 if( $where ){
 	$join = [];
 	foreach( $where as $field => $value ){
