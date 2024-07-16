@@ -143,7 +143,7 @@ class QQL implements IF_UNIT, IF_QQL
 	 * @param      array      $option
 	 * @return     int
 	 */
-	static public function Set(string $qql, array $set, array $where=[], array $option=[]) : int
+	static public function Set(string $qql, array $set, array $where=[], array $option=[])
 	{
 		//	...
 		if( empty($qql) ){
