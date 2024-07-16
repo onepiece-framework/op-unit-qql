@@ -12,6 +12,8 @@ QQL is Quick Query Language
  * Limit
  * Offset
  * Pager
+ * Field
+ * As
 
 # Not Supported
 
