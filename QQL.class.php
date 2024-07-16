@@ -255,6 +255,7 @@ class QQL implements IF_UNIT, IF_QQL
 	static public function Get(string $qql, array $where=[], array $option=[]) : array
 	{
 		//	...
+		$get    = true;
 		$quote  = include(__DIR__.'/include/quote.php' );
 		$parsed = include(__DIR__.'/include/parser.php');
 		$OPTION = include(__DIR__.'/include/option.php');
@@ -273,8 +274,8 @@ class QQL implements IF_UNIT, IF_QQL
 			return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		}
 
-		//	for Eclipse notice.
-		if( 0 ){ D($quote); }
+		//	...
+		unset($get, $quote);
 	}
 
 	/** Stack errors
