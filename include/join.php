@@ -25,21 +25,44 @@ namespace OP\UNIT\QQL;
 $ON = [];
 foreach( explode('+', $table) as $temp ){
 	//	...
-	list($l, $r) = explode('.', $temp);
-	$on = $quote . trim($l) . $quote .'.'. $quote . trim($r) . $quote;
+	$temp = trim($temp);
+
+	//	t_table:t.id --> t_table:t , id
+	list($tbl, $fld) = explode('.', $temp);
+
+	//	t_table:t --> t_table , t
+	if( $pos = strpos($tbl, ':') ){
+		$als = substr($tbl, $pos +1);
+		$tbl = substr($tbl, 0, $pos);
+		//	"t_table" AS "t"
+		$tbl = $quote . trim($tbl) . $quote . ' AS ' . $quote . trim($als) . $quote;
+	}else{
+		$tbl = $quote . trim($tbl) . $quote;
+	}
+
+	//	field
+	$fld = $quote . trim($fld) . $quote;
+
+	//	t_table:t , id --> "t_table:t"."id"
+	$on = $quote . $als . $quote .'.'. $fld;
+
 	//	...
 	if(!$ON ){
-		$FROM = $quote . trim($l) . $quote;
+		//	1st table
+		$FROM = $tbl;
+		//	Stack 1st table
 		$ON[] = $on;
 	}else{
+		//	Stack next join
 		$ON[]  = $on;
-		$JOIN  = ' LEFT JOIN ';
-		$FROM .= $JOIN . $quote . trim($l) . $quote;
+		//	JOIN
+		$FROM .= ' LEFT JOIN ' . trim($tbl);
 		$FROM .= ' ON ' . $ON[0] .' = '. $ON[1];
+		//	Dispose joined table
 		array_shift($ON);
 	}
 }
-unset($l, $r, $on, $ON, $JOIN);
+unset($temp, $tbl, $fld, $on, $ON);
 
 //	...
 return $FROM;

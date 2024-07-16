@@ -43,7 +43,10 @@ if( $pos = strpos($qql, '<-') ){
 		$field = trim($field);
 		//	...
 		if( $pos = strpos($field, ' as ') ){
-			$join[] = include(__DIR__.'/as.php');
+			$join[] = include(__DIR__.'/asField.php');
+		}else
+		if( $pos = strpos($field, '.') ){
+			$join[] = include(__DIR__.'/field.php');
 		}else{
 			$parse['FIELDs'][] = $field;
 			$join[] = $quote . $field . $quote;
@@ -53,40 +56,57 @@ if( $pos = strpos($qql, '<-') ){
 }
 
 //	Find where condition
-if( $pos = strpos($qql, '= ') ){
+if( $pos = strpos($qql, '=') ){
 	$evl = substr($qql, $pos-1, 2);
 	$val = substr($qql, $pos+1);
 	$qql = substr($qql, 0, $pos-1);
-	//	Separate table and field
-	if( $pos   = strpos($qql, '.') ){
-		$table = substr($qql, 0, $pos);
-		$field = substr($qql, $pos+1);
-		//	...
-		$table = trim($table);
+
+	//	Search target field.
+	if( $pos = strrpos($qql, ':') ){
+		//	found
+	}else if( $pos = strrpos($qql, '.') ){
+		//	found
+	}
+	if( $pos ){
+		$field = substr($qql, $pos +1);
 		$field = trim($field);
-		//	...
 		$where[$field] = trim($val);
 		$evalu[$field] = trim($evl);
 	}
-}else{
-	$table = trim($qql);
 }
 
 //	...
 $parse['TABLE'] = include(__DIR__.'/table.php');
 
-/* @var $get bool */
-if( empty($get) ){
-	//	...
-}else
+//	...
 if( $where ){
 	$join = [];
 	foreach( $where as $field => $value ){
-		$value  = $evalu[$field] ?? '=';
-		$join[] = "{$quote}{$field}{$quote} {$value} :{$field}";
+		//	...
+		$field = trim($field);
+		//	...
+		if( strpos($field, '.') ){
+			$temp  = explode('.', $field);
+			$field = $temp[0].'_'.$temp[1];
+			$joint = $quote.$temp[0].$quote.'.'.$quote.$temp[1].$quote;
+		}else{
+			$joint = $quote.$field.$quote;
+		}
+		//	...
+		$veval  = $evalu[$field] ?? '=';
+		//	...
+		$join[] = "{$joint} {$veval} :{$field}";
+		//	...
+		$alias[$field] = $value;
 	}
+	//	...
 	$parse['WHERE'] = 'WHERE ' . join(' AND ', $join);
+	//	...
+	$where = $alias;
 }
+
+//	...
+unset($pos, $fld, $field, $evl, $val, $evalu, $alias, $temp, $joint, $alias);
 
 //	...
 return $parse;
