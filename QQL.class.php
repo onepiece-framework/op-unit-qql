@@ -385,6 +385,7 @@ class QQL implements IF_UNIT, IF_QQL
 		switch( $code ){
 			case ' ':
 				OP()->Notice("Does not match where field.");
+				D( self::$_request );
 				break;
 		}
 
