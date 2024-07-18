@@ -21,17 +21,36 @@ namespace OP\UNIT\QQL;
 /* @var $option array  */
 
 //	...
-$OPTION = '';
+$OPTION = [];
 
 //	...
-if( empty($option['limit']) ){
-	$option['limit'] = 1;
+foreach( $option as $key => $val ){
+
+	//	...
+	if( is_integer($key) ){
+		$val = trim($val);
+		if( $pos = strpos($val, ' ') ){
+			$key = substr($val, 0, $pos);
+			$val = substr($val, $pos +1);
+		}else{
+			D('Does not match option format.', $val);
+			continue;
+		}
+	}
+
+	//	...
+	switch( $key = strtoupper($key) ){
+		case 'LIMIT':
+			if( $val > 0 ){
+				$OPTION[] = $key.' '.$val;
+			}
+			break;
+
+		case 'ORDER':
+			$OPTION[] = $key.' BY '.$val;
+			break;
+	}
 }
 
 //	...
-if( 0 < $limit = $option['limit'] ){
-	$OPTION = 'LIMIT ' . $limit;
-}
-
-//	...
-return $OPTION;
+return join(' ', $OPTION);
