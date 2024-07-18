@@ -285,7 +285,7 @@ class QQL implements IF_UNIT, IF_QQL
 		//	...
 		if( $option['limit'] == 1 ){
 			//	...
-			$records = $records[0] ?? null;
+			$records = $records[0] ?? [];
 
 			//	...
 			if( count($parsed['FIELDs'] ?? []) === 1 ){
@@ -301,7 +301,7 @@ class QQL implements IF_UNIT, IF_QQL
 		unset($get, $quote);
 
 		//	...
-		return $records ?? null;
+		return $records ?? [];
 	}
 
 	/** Stack errors
