@@ -1,0 +1,31 @@
+
+/** op-unit-qql:/function/display.css
+ *
+ * @created     2024-07-19
+ * @version     1.0
+ * @package     op-unit-qql
+ * @author      Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
+ * @copyright   Tomoaki Nagahara All right reserved.
+ */
+
+div.qql.records table {
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+
+div.qql.records th {
+	color: var(--color-back);
+	background-color: var(--color-text);
+}
+
+div.qql.records th,
+div.qql.records td {
+	padding: 0 0.25em 0 0.5em;
+}
+
+div.qql.records table,
+div.qql.records tr,
+div.qql.records th,
+div.qql.records td {
+	border: 1px solid var(--color-border);
+}
