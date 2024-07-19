@@ -332,6 +332,27 @@ class QQL implements IF_UNIT, IF_QQL
 		return $records ?? [];
 	}
 
+	/** Display the records retrieved from the database in a table format.
+	 *
+	 */
+	static public function Display(string $qql, array $where=[], array $option=[], int $limit=-1)
+	{
+		//	...
+		OP()->WebPack(__DIR__.'/webpack/display.*');
+
+		//	...
+		if(!$records = self::Get($qql, $where, $option, $limit) ){
+			OP()->Notice( self::Error() );
+			return;
+		}
+
+		//	...
+		$records = \OP\Encode($records);
+		$json = json_encode($records);
+		$json = htmlentities($json, ENT_NOQUOTES, 'utf-8');
+		echo '<div class="qql records">'.$json.'</div>';
+	}
+
 	/** Stack errors
 	 *
 	 * @created    2024-07-13

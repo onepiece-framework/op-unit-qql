@@ -96,6 +96,12 @@ $result = [
 $ci->Set($method, $result, $args);
 
 //	...
+$method = 'Display';
+$args   = "t_user.ai = 1";
+$result = '<div class="qql records">[{"ai":1,"name":"user","group":1,"age":1,"timestamp":"2024-07-15 00:00:00"}]</div>';
+$ci->Set($method, $result, $args);
+
+//	...
 $method = '_Error';
 $args   =  new \PDOException();
 $result =  null;
