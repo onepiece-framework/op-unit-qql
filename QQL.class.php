@@ -74,6 +74,12 @@ class QQL implements IF_UNIT, IF_QQL
 	 */
 	static $_type;
 
+	/** Stack request for debug.
+	 *
+	 * @var array
+	 */
+	static $_request;
+
 	/** Open database resource.
 	 *
 	 * @created    2024-07-13
