@@ -258,8 +258,13 @@ class QQL implements IF_UNIT, IF_QQL
 	 * @param      array      $option
 	 * @return     array      $record
 	 */
-	static public function Get(string $qql, array $where=[], array $option=[], int $limit=1)
+	static public function Get(string $qql, $where=null, $option=null, int $limit=1)
 	{
+		//	Convert to array from string.
+		if( is_string($where) ){
+			$where = [$where];
+		}
+
 		//	...
 		if( empty($option['limit']) ){
 			$option['limit'] = $limit;
