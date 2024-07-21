@@ -367,12 +367,23 @@ class QQL implements IF_UNIT, IF_QQL
 	static private function _Error( \PDOException $e )
 	{
 		//	...
-		$code    = $e->getCode();
-		$message = $e->getMessage();
+		if(!$error_info = $e->errorInfo ?? null ){
+			return;
+		}
+
+		//	...
+	//	$HY000 = $error_info[0] ?? null;
+		$code  = $error_info[1] ?? null;
+		$info  = $error_info[2] ?? null;
+		$message = "[{$code}] {$info}";
+
+		//	...
+		$request = self::$_request[count(self::$_request)-1];
+		D($message, $request);
 
 		//	...
 		switch( $code ){
-			case 'HY000':
+			case ' ':
 				OP()->Notice("Does not match where field.");
 				break;
 		}
