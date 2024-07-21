@@ -280,6 +280,20 @@ class QQL implements IF_UNIT, IF_QQL
 		$sql = "SELECT {$parsed['FIELD']} FROM {$parsed['TABLE']} {$parsed['WHERE']} {$OPTION}";
 
 		//	...
+		if( OP()->Env()->isAdmin() ){
+			//	...
+			self::$_request[] = [
+				'qql'    => $qql,
+				'where'  => $where,
+				'option' => $option,
+				'limit'  => $limit,
+				'parsed' => $parsed,
+				'OPTION' => $OPTION,
+				'sql'    => $sql,
+			];
+		}
+
+		//	...
 		try{
 
 		//	...
