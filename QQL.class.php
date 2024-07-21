@@ -335,7 +335,7 @@ class QQL implements IF_UNIT, IF_QQL
 	/** Display the records retrieved from the database in a table format.
 	 *
 	 */
-	static public function Display(string $qql, array $where=[], array $option=[], int $limit=-1)
+	static public function Display(string $qql, $where=null, $option=null, int $limit=-1)
 	{
 		//	...
 		OP()->WebPack(__DIR__.'/webpack/display.*');
