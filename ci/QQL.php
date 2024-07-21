@@ -138,6 +138,63 @@ $result = [
 ];
 $ci->Set($method, $result, $args);
 
+//	TABLE RIGHT JOIN
+$method = 'Get';
+$qql    = " t_user.group +> t_group.ai ";
+$where  = ' t_user.ai = 1 ';
+$option = [];
+$args   = [$qql, $where, $option];
+$result = [
+	'ai'        =>  1,
+	'name'      => 'ci',
+	'group'     =>  1,
+	'age'       =>  1,
+	'timestamp' => null,
+];
+$ci->Set($method, $result, $args);
+
+//	TABLE INNER JOIN
+$method = 'Get';
+$qql    = " t_user.group >+< t_group.ai ";
+$option = [];
+$args   = [$qql, $where, $option];
+$result = [
+	'ai'        =>  1,
+	'name'      => 'ci',
+	'group'     =>  1,
+	'age'       =>  1,
+	'timestamp' => null,
+];
+$ci->Set($method, $result, $args);
+
+//	TABLE LEFT OUTER JOIN
+$method = 'Get';
+$qql    = " t_user.group <+< t_group.ai ";
+$option = [];
+$args   = [$qql, $where, $option];
+$result = [
+	'ai'        =>  1,
+	'name'      => 'ci',
+	'group'     =>  1,
+	'age'       =>  1,
+	'timestamp' => null,
+];
+$ci->Set($method, $result, $args);
+
+//	TABLE RIGHT OUTER JOIN
+$method = 'Get';
+$qql    = " t_user.group >+> t_group.ai ";
+$option = [];
+$args   = [$qql, $where, $option];
+$result = [
+	'ai'        =>  1,
+	'name'      => 'ci',
+	'group'     =>  1,
+	'age'       =>  1,
+	'timestamp' => null,
+];
+$ci->Set($method, $result, $args);
+
 //	...
 $method = 'Display';
 $args   = "t_user.ai = 1";

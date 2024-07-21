@@ -23,9 +23,13 @@ namespace OP\UNIT\QQL;
 
 //	...
 $ON = [];
+$JOIN = $LEFT = $RIGHT = null;
 foreach( explode('+', $table) as $temp ){
 	//	...
 	$temp = trim($temp);
+
+	//	...
+	$JOIN = include(__DIR__.'/join_calc.php');
 
 	//	t_table:t.id --> t_table:t , id
 	list($tbl, $fld) = explode('.', $temp);
@@ -58,13 +62,13 @@ foreach( explode('+', $table) as $temp ){
 		//	Stack next join
 		$ON[]  = $on;
 		//	JOIN
-		$FROM .= ' LEFT JOIN ' . trim($tbl);
+		$FROM .= " {$JOIN} JOIN " . trim($tbl);
 		$FROM .= ' ON ' . $ON[0] .' = '. $ON[1];
 		//	Dispose joined table
 		array_shift($ON);
 	}
 }
-unset($temp, $tbl, $fld, $on, $ON);
+unset($temp, $tbl, $fld, $on, $ON, $JOIN, $LEFT, $RIGHT);
 
 //	...
 return $FROM;
