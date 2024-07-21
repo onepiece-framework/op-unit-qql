@@ -56,23 +56,30 @@ if( $pos = strpos($qql, '<-') ){
 }
 
 //	Find where condition
-if( $pos = strpos($qql, '=') ){
+if( $po1 = strpos($qql, '=') ){
+	/*
 	$evl = substr($qql, $pos-1, 2);
 	$val = substr($qql, $pos+1);
 	$qql = substr($qql, 0, $pos-1);
+	*/
 
 	//	Search target field.
-	if( $pos = strrpos($qql, ':') ){
+	if( $pos = strrpos($qql, ':', -(strlen($qql)-$po1)) ){
 		//	found
-	}else if( $pos = strrpos($qql, '.') ){
-		//	found
+	}else{
+		$pos = strrpos($qql, '.', -(strlen($qql)-$po1));
 	}
-	if( $pos ){
-		$field = substr($qql, $pos +1);
-		$field = trim($field);
-		$where[$field] = trim($val);
-		$evalu[$field] = trim($evl);
+
+	//	Not Found
+	if( $pos === false ){
+		OP()->Notice("QQL format error: `{$qql}`");
 	}
+
+	//	...
+	$qql = ' '.$qql;
+	$pos = strrpos($qql, ' ',  -(strlen($qql)-$pos));
+	$where[] = substr($qql, $pos +1);
+	$qql = trim( substr($qql, 0, $po1) );
 }
 
 //	...
@@ -80,6 +87,7 @@ $parse['TABLE'] = include(__DIR__.'/table.php');
 
 //	...
 if( $where ){
+	/*
 	$join = [];
 	foreach( $where as $field => $value ){
 		//	...
@@ -103,6 +111,11 @@ if( $where ){
 	$parse['WHERE'] = 'WHERE ' . join(' AND ', $join);
 	//	...
 	$where = $alias;
+	*/
+
+	//	...
+	require_once(__DIR__.'/../function/parser_where.php');
+	$parse['WHERE'] = parser_where($where, $quote);
 }
 
 //	...

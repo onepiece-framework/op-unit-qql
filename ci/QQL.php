@@ -95,6 +95,49 @@ $result = [
 ];
 $ci->Set($method, $result, $args);
 
+//	TABLE JOIN - Not specify field
+$method = 'Get';
+$qql    = " t_user.group + t_group.ai = 1 ";
+$where  = [];
+$option = [];
+$args   = [$qql, $where, $option];
+$result = [
+	'ai'        =>  1,
+	'name'      => 'ci',
+	'group'     =>  1,
+	'age'       =>  1,
+	'timestamp' => null,
+];
+$ci->Set($method, $result, $args);
+
+//	TABLE JOIN - Not specify field - Separate where
+$method = 'Get';
+$qql    = " t_user.group + t_group.ai ";
+$where  = ' t_user.ai = 1 ';
+$option = [];
+$args   = [$qql, $where, $option];
+$result = [
+	'ai'        =>  1,
+	'name'      => 'ci',
+	'group'     =>  1,
+	'age'       =>  1,
+	'timestamp' => null,
+];
+$ci->Set($method, $result, $args);
+
+//	TABLE JOIN - Specify field with alias name
+$method = 'Get';
+$qql    = " u.ai, u.name, g.name:group <- t_user:u.group + t_group:g.ai ";
+$where  = ' u.ai = 1 ';
+$option = [];
+$args   = [$qql, $where, $option];
+$result = [
+	'ai'        =>  1,
+	'name'      => 'user',
+	'group'     => 'ci',
+];
+$ci->Set($method, $result, $args);
+
 //	...
 $method = 'Display';
 $args   = "t_user.ai = 1";
