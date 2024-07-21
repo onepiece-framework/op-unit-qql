@@ -57,12 +57,6 @@ if( $pos = strpos($qql, '<-') ){
 
 //	Find where condition
 if( $po1 = strpos($qql, '=') ){
-	/*
-	$evl = substr($qql, $pos-1, 2);
-	$val = substr($qql, $pos+1);
-	$qql = substr($qql, 0, $pos-1);
-	*/
-
 	//	Search target field.
 	if( $pos = strrpos($qql, ':', -(strlen($qql)-$po1)) ){
 		//	found
@@ -87,39 +81,13 @@ $parse['TABLE'] = include(__DIR__.'/table.php');
 
 //	...
 if( $where ){
-	/*
-	$join = [];
-	foreach( $where as $field => $value ){
-		//	...
-		$field = trim($field);
-		//	...
-		if( strpos($field, '.') ){
-			$temp  = explode('.', $field);
-			$field = $temp[0].'_'.$temp[1];
-			$joint = $quote.$temp[0].$quote.'.'.$quote.$temp[1].$quote;
-		}else{
-			$joint = $quote.$field.$quote;
-		}
-		//	...
-		$veval  = $evalu[$field] ?? '=';
-		//	...
-		$join[] = "{$joint} {$veval} :{$field}";
-		//	...
-		$alias[$field] = $value;
-	}
-	//	...
-	$parse['WHERE'] = 'WHERE ' . join(' AND ', $join);
-	//	...
-	$where = $alias;
-	*/
-
 	//	...
 	require_once(__DIR__.'/../function/parser_where.php');
 	$parse['WHERE'] = parser_where($where, $quote);
 }
 
 //	...
-unset($pos, $fld, $field, $evl, $val, $evalu, $alias, $temp, $joint, $alias);
+unset($pos, $fld, $field);
 
 //	...
 return $parse;
