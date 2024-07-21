@@ -260,6 +260,14 @@ class QQL implements IF_UNIT, IF_QQL
 	 */
 	static public function Get(string $qql, $where=null, $option=null, int $limit=1)
 	{
+		//	For developer
+		$origin = [
+			'qql'    => $qql,
+			'where'  => $where,
+			'option' => $option,
+			'limit'  => $limit,
+		];
+
 		//	Convert to array from string.
 		if( is_string($where) ){
 			$where = [$where];
@@ -283,6 +291,7 @@ class QQL implements IF_UNIT, IF_QQL
 		if( OP()->Env()->isAdmin() ){
 			//	...
 			self::$_request[] = [
+				'origin' => $origin,
 				'qql'    => $qql,
 				'where'  => $where,
 				'option' => $option,
