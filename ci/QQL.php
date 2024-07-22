@@ -120,4 +120,10 @@ $result =  null;
 $ci->Set($method, $result, $args);
 
 //	...
+$method = 'Quote';
+$args   = 't_table:t.id';
+$result = '"t_table" AS "t"."id"';
+$ci->Set($method, $result, $args);
+
+//	...
 return $ci->Get();

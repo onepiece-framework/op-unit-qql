@@ -405,4 +405,23 @@ class QQL implements IF_UNIT, IF_QQL
 		//	...
 		D( self::$_request );
 	}
+
+	/** Quote field name.
+	 *
+	 * @created    2024-07-22
+	 * @param      string     $field
+	 * @return     string
+	 */
+	static public function Quote(string $field) : string
+	{
+		//	...
+		if( strpos($field, ':') ){
+			return include(__DIR__.'/include/quote_table.php');
+		}else
+		if( strpos($field, '(') ){
+			return include(__DIR__.'/include/quote_field.php');
+		}else{
+			return include(__DIR__.'/include/quoted.php');
+		}
+	}
 }
