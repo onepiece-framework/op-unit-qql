@@ -42,6 +42,9 @@ if( $pos = strpos($qql, '<-') ){
 		//	...
 		$field = trim($field);
 		//	...
+		if( strpos($field, '(') ){
+			$join[] = self::Quote($field);
+		}else
 		if( $pos = strpos($field, ' as ') ){
 			$join[] = include(__DIR__.'/asField.php');
 		}else
