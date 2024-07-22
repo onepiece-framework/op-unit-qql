@@ -390,4 +390,19 @@ class QQL implements IF_UNIT, IF_QQL
 	{
 		return empty(self::$_errors) ? '': array_shift( self::$_errors );
 	}
+
+	/** Dump debug information for developers.
+	 *
+	 * @created    2024-07-22
+	 */
+	static public function Debug()
+	{
+		//	...
+		if( \OP\Env::isCI() ){
+			return;
+		}
+
+		//	...
+		D( self::$_request );
+	}
 }
