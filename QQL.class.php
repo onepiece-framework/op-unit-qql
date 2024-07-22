@@ -270,7 +270,10 @@ class QQL implements IF_UNIT, IF_QQL
 
 		//	Convert to array from string.
 		if( is_string($where) ){
-			$where = [$where];
+			$where  = explode(',', $where );
+		}
+		if( is_string($option) ){
+			$option = explode(',', $option);
 		}
 
 		//	...
