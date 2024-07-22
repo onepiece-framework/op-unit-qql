@@ -114,4 +114,10 @@ $result = '';
 $ci->Set($method, $result, $args);
 
 //	...
+$method = 'Debug';
+$args   =  null;
+$result =  null;
+$ci->Set($method, $result, $args);
+
+//	...
 return $ci->Get();
