@@ -195,6 +195,16 @@ $result = [
 ];
 $ci->Set($method, $result, $args);
 
+//	GROUP BY
+$method = 'Get';
+$where  = [];
+$option = [
+	'group' => 'group',
+];
+$args   = [' count(*) <- t_user ', $where, $option];
+$result = ['count("*")' => 1];
+$ci->Set($method, $result, $args);
+
 //	...
 $method = 'Display';
 $args   = "t_user.ai = 1";
