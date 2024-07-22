@@ -42,8 +42,13 @@ foreach( $option as $key => $val ){
 }
 $option = $temp;
 
+//	pager
+if( isset($option['page']) ){
+	require(__DIR__.'/option_page.php');
+}
+
 //	...
-foreach( ['group','order','limit','offset','page',] as $key ){
+foreach( ['group','order','limit','offset'] as $key ){
 	//	...
 	if(!$val = $option[$key] ?? null ){
 		continue;
@@ -68,7 +73,7 @@ foreach( ['group','order','limit','offset','page',] as $key ){
 
 		case 'LIMIT':
 		case 'OFFSET':
-			if( is_int($val) and $val > 0 ){
+			if( is_int($val) and $val >= 0 ){
 				$OPTION[] = $key.' '.$val;
 			}
 			break;
