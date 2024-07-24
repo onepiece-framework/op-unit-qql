@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace OP\UNIT\QQL;
 
 //	...
-switch( strtolower( self::$_type[ self::$_hash ] ) ){
+switch( self::$_PDOs[ self::$_hash ] -> getAttribute(\PDO::ATTR_DRIVER_NAME) ){
 
 	case 'mysql':
 		$quote = '`';

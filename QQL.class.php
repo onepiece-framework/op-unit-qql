@@ -63,17 +63,6 @@ class QQL implements IF_UNIT, IF_QQL
 	 */
 	static $_hash;
 
-	/** Stock database type.
-	 *
-	 * <pre>
-	 * self::$_type[ self::$_hash ] = 'mysql';
-	 * </pre>
-	 *
-	 * @created    2024-07-13
-	 * @var        array
-	 */
-	static $_type;
-
 	/** Stack request for debug.
 	 *
 	 * @var array
@@ -104,13 +93,7 @@ class QQL implements IF_UNIT, IF_QQL
 		}
 
 		//	...
-		if( $pos  = strpos($dsn, ':') ){
-			$type = substr($dsn, 0, $pos);
-		}
-
-		//	...
 		self::$_hash = substr(md5($dsn), 0, 10);
-		self::$_type [ self::$_hash ] = $type;
 
 		//	...
 		if( isset( self::$_PDOs[ self::$_hash ] ) ){
