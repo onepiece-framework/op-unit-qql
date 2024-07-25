@@ -18,8 +18,12 @@ declare(strict_types=1);
  */
 namespace OP\UNIT\QQL;
 
-//	...
+/* @var $QQL \OP\UNIT\QQL */
+$QQL   = OP()->Unit('QQL');
 $path  = 'sandbox/QQL.sqlite3';
-$hash  = OP()->Unit()->QQL()->Open($path);
-$error = OP()->Unit()->QQL()->Error();
+$hash  = $QQL -> Open($path);
+$error = $QQL -> Error();
 D($path, $hash, $error);
+
+//	...
+return $QQL;
