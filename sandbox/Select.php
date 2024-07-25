@@ -18,17 +18,17 @@ declare(strict_types=1);
  */
 namespace OP\UNIT\QQL;
 
-//	...
-include('Open.php');
+/* @var $QQL \OP\UNIT\QQL */
+$QQL = include('Open.php');
 
 //	...
 $qql = ' t_user ';
-$record = OP()->Unit()->QQL()->Get($qql, [], ['limit'=>-1]);
+$record = $QQL -> Get($qql, [], ['limit'=>-1]);
 OP()->Html($qql);
 D($record);
 
 //	...
 $qql = ' t_group ';
-$record = OP()->Unit()->QQL()->Get($qql, [], ['limit'=>-1]);
+$record = $QQL -> Get($qql, [], ['limit'=>-1]);
 OP()->Html($qql);
 D($record);
