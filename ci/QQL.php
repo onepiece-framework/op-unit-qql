@@ -29,10 +29,13 @@ $args   = ['ci.phtml',['arg1'=>$arg1, 'arg2'=>$arg2]];
 $result = $arg1 . $arg2;
 $ci->Set($method, $result, $args);
 
+/* @var $qql \OP\UNIT\QQL */
+$qql = OP()->Unit('QQL');
+
 //	...
 $path = 'ci/QQL.sqlite3';
-$hash = OP()->Unit()->QQL()->Open( $path );
-foreach( OP()->Unit()->QQL()->Get(' sqlite_sequence ', [], ['limit'=>-1]) as $record ){
+$hash = $qql->Open( $path );
+foreach($qql->Get(' sqlite_sequence ', [], ['limit'=>-1]) as $record){
 	$sequence[$record['name']] = $record['seq'];
 }
 
@@ -103,10 +106,10 @@ $option = [];
 $args   = [$qql, $where, $option];
 $result = [
 	'ai'        =>  1,
-	'name'      => 'ci',
+	'name'      => 'OP',
 	'group'     =>  1,
 	'age'       =>  1,
-	'timestamp' => null,
+	'timestamp' => '2024-07-15 00:00:00',
 ];
 $ci->Set($method, $result, $args);
 
@@ -116,13 +119,7 @@ $qql    = " t_user.group + t_group.ai ";
 $where  = ' t_user.ai = 1 ';
 $option = [];
 $args   = [$qql, $where, $option];
-$result = [
-	'ai'        =>  1,
-	'name'      => 'ci',
-	'group'     =>  1,
-	'age'       =>  1,
-	'timestamp' => null,
-];
+//	$result = [];
 $ci->Set($method, $result, $args);
 
 //	TABLE JOIN - Specify field with alias name
@@ -133,8 +130,8 @@ $option = [];
 $args   = [$qql, $where, $option];
 $result = [
 	'ai'        =>  1,
-	'name'      => 'user',
-	'group'     => 'ci',
+	'name'      => 'CI',
+	'group'     => 'OP',
 ];
 $ci->Set($method, $result, $args);
 
@@ -146,10 +143,10 @@ $option = [];
 $args   = [$qql, $where, $option];
 $result = [
 	'ai'        =>  1,
-	'name'      => 'ci',
+	'name'      => 'OP',
 	'group'     =>  1,
 	'age'       =>  1,
-	'timestamp' => null,
+	'timestamp' => '2024-07-15 00:00:00',
 ];
 $ci->Set($method, $result, $args);
 
@@ -158,13 +155,7 @@ $method = 'Get';
 $qql    = " t_user.group >+< t_group.ai ";
 $option = [];
 $args   = [$qql, $where, $option];
-$result = [
-	'ai'        =>  1,
-	'name'      => 'ci',
-	'group'     =>  1,
-	'age'       =>  1,
-	'timestamp' => null,
-];
+//	$result = [];
 $ci->Set($method, $result, $args);
 
 //	TABLE LEFT OUTER JOIN
@@ -172,13 +163,7 @@ $method = 'Get';
 $qql    = " t_user.group <+< t_group.ai ";
 $option = [];
 $args   = [$qql, $where, $option];
-$result = [
-	'ai'        =>  1,
-	'name'      => 'ci',
-	'group'     =>  1,
-	'age'       =>  1,
-	'timestamp' => null,
-];
+//	$result = [];
 $ci->Set($method, $result, $args);
 
 //	TABLE RIGHT OUTER JOIN
@@ -186,13 +171,7 @@ $method = 'Get';
 $qql    = " t_user.group >+> t_group.ai ";
 $option = [];
 $args   = [$qql, $where, $option];
-$result = [
-	'ai'        =>  1,
-	'name'      => 'ci',
-	'group'     =>  1,
-	'age'       =>  1,
-	'timestamp' => null,
-];
+//	$result = [];
 $ci->Set($method, $result, $args);
 
 //	GROUP BY
@@ -208,7 +187,7 @@ $ci->Set($method, $result, $args);
 //	...
 $method = 'Display';
 $args   = "t_user.ai = 1";
-$result = '<div class="qql records">[{"ai":1,"name":"user","group":1,"age":1,"timestamp":"2024-07-15 00:00:00"}]</div>';
+$result = '<div class="qql records">[{"ai":1,"name":"CI","group":1,"age":1,"timestamp":"2024-07-25 09:00:00"}]</div>';
 $ci->Set($method, $result, $args);
 
 //	...
