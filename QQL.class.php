@@ -367,8 +367,10 @@ class QQL implements IF_UNIT, IF_QQL
 		$message = "[{$code}] {$info}";
 
 		//	...
+		if( self::$_request ){
 		$request = self::$_request[count(self::$_request)-1];
 		D($message, $request);
+		}
 
 		//	...
 		switch( $code ){
