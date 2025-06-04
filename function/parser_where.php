@@ -31,8 +31,10 @@ function parser_where( & $where, $quote)
 		//	Is array ? or assoc ?
 		if( is_int($field) ){
 			//	array
+			if( $value ){
 			require_once(__DIR__.'/../function/parser_where_value_string.php');
 			list($field, $evalu, $value) = parser_where_value_string($value);
+			}
 		}else{
 			//	assoc
 			$evalu = '=';
