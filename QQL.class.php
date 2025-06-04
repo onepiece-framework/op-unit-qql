@@ -308,7 +308,10 @@ class QQL implements IF_UNIT, IF_QQL
 		}
 
 		}catch( \PDOException $e ){
+			/*
 			self::_Error($e);
+			*/
+			OP()->Notice($e);
 		}
 
 		//	...
