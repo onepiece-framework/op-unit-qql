@@ -26,7 +26,7 @@ $path = $root . $dsn;
 
 //	...
 if(!file_exists($path) ){
-	throw new \Exception("Database file does not exists. `$path`");
+	throw new \Exception("The database file does not exist: `$path`");
 }
 
 //	...
