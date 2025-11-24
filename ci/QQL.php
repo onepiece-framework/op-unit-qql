@@ -89,10 +89,10 @@ $ci->Set($method, $result, $args);
 $method = 'Get';
 $args   = "t_user.ai = {$user_ai}";
 $result = [
-	'ai'        => $user_ai,
-	'name'      => $user_name,
-	'group'     => $group_ai,
-	'age'       => 2,
+	'ai'        => "$user_ai",
+	'name'      => "$user_name",
+	'group'     => "$group_ai",
+	'age'       => "2",
 	'timestamp' => gmdate(_OP_DATE_TIME_),
 ];
 $ci->Set($method, $result, $args);
@@ -104,10 +104,10 @@ $where  = [];
 $option = [];
 $args   = [$qql, $where, $option];
 $result = [
-	'ai'        =>  1,
+	'ai'        =>  "1",
 	'name'      => 'OP',
-	'group'     =>  1,
-	'age'       =>  1,
+	'group'     =>  "1",
+	'age'       =>  "1",
 	'timestamp' => '2024-07-15 00:00:00',
 ];
 $ci->Set($method, $result, $args);
@@ -128,7 +128,7 @@ $where  = ' u.ai = 1 ';
 $option = [];
 $args   = [$qql, $where, $option];
 $result = [
-	'ai'        =>  1,
+	'ai'        => "1",
 	'name'      => 'CI',
 	'group'     => 'OP',
 ];
@@ -141,10 +141,10 @@ $where  = ' t_user.ai = 1 ';
 $option = [];
 $args   = [$qql, $where, $option];
 $result = [
-	'ai'        =>  1,
+	'ai'        =>  "1",
 	'name'      => 'OP',
-	'group'     =>  1,
-	'age'       =>  1,
+	'group'     =>  "1",
+	'age'       =>  "1",
 	'timestamp' => '2024-07-15 00:00:00',
 ];
 $ci->Set($method, $result, $args);
@@ -180,13 +180,13 @@ $option = [
 	'group' => 'group',
 ];
 $args   = [' count(*) <- t_user ', $where, $option];
-$result = ['count("*")' => 1];
+$result = ['count("*")' => "1"];
 $ci->Set($method, $result, $args);
 
 //	...
 $method = 'Display';
 $args   = "t_user.ai = 1";
-$result = '<div class="qql records">[{"ai":1,"name":"CI","group":1,"age":1,"timestamp":"2024-07-25 09:00:00"}]</div>';
+$result = '<div class="qql records">[{"ai":"1","name":"CI","group":"1","age":"1","timestamp":"2024-07-25 09:00:00"}]</div>';
 $ci->Set($method, $result, $args);
 
 //	...
