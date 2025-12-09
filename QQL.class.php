@@ -1,24 +1,23 @@
 <?php
-/** op-unit-qql:/QQL.class.php
+/**	op-unit-qql:/QQL.class.php
  *
  * @created    2024-07-12
- * @version    1.0
+ * @license    Apache-2.0
  * @package    op-unit-qql
- * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
- * @copyright  Tomoaki Nagahara All right reserved.
+ * @copyright  (C) 2024 Tomoaki Nagahara
  */
 
-/** Declare strict
+/**	Declare strict type
  *
  */
 declare(strict_types=1);
 
-/** namespace
+/**	Namespace
  *
  */
 namespace OP\UNIT;
 
-/** use
+/**	Use
  *
  */
 use OP\IF_UNIT;
@@ -26,17 +25,13 @@ use OP\OP_CORE;
 use OP\OP_CI;
 use OP\IF_QQL;
 
-/** QQL
+/**	QQL
  *
  * @created    2024-07-12
- * @version    1.0
- * @package    op-unit-qql
- * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
- * @copyright  Tomoaki Nagahara All right reserved.
  */
 class QQL implements IF_UNIT, IF_QQL
 {
-	/** use
+	/**	Use
 	 *
 	 */
 	use OP_CORE, OP_CI;

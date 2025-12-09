@@ -2,10 +2,9 @@
 /** op-unit-qql:/include/field.php
  *
  * @created    2024-07-15
- * @version    1.0
+ * @license    Apache-2.0
  * @package    op-unit-qql
- * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
- * @copyright  Tomoaki Nagahara All right reserved.
+ * @copyright  (C) 2024 Tomoaki Nagahara
  */
 
 /** Declare strict
