@@ -88,6 +88,14 @@ class QQL implements IF_UNIT, IF_QQL
 		}
 
 		//	...
+		if( OP()->isCI() ){
+			//	...
+			if( OP()->Unit()->CI()->isGitHubActions() ){
+				$dsn = 'sqlite:'.__DIR__.'/QQL.sqlite3';
+			}
+		}
+
+		//	...
 		self::$_hash = substr(md5($dsn), 0, 10);
 
 		//	...
