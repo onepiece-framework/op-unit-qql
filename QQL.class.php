@@ -87,6 +87,7 @@ class QQL implements IF_UNIT, IF_QQL
 			$dsn = include(__DIR__.'/include/DsnArray.php');
 		}
 
+		/*
 		//	...
 		if( OP()->isCI() ){
 			//	...
@@ -94,6 +95,7 @@ class QQL implements IF_UNIT, IF_QQL
 				$dsn = 'sqlite:'.__DIR__.'/QQL.sqlite3';
 			}
 		}
+		*/
 
 		//	...
 		self::$_hash = substr(md5($dsn), 0, 10);
