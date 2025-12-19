@@ -30,6 +30,9 @@ if( OP()->isCI() ){
 	}
 }
 
+//	Get PHP version
+$php = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
+
 /* @var $ci UNIT\CI\CI_Config */
 $ci = OP::Unit('CI')::Config();
 
@@ -102,10 +105,10 @@ $ci->Set($method, $result, $args);
 $method = 'Get';
 $args   = "t_user.ai = {$user_ai}";
 $result = [
-	'ai'        => "$user_ai",
-	'name'      => "$user_name",
-	'group'     => "$group_ai",
-	'age'       => "2",
+	'ai'        => $php == 80 ? "$user_ai"   : $user_ai,
+	'name'      => $php == 80 ? "$user_name" : $user_name,
+	'group'     => $php == 80 ? "$group_ai"  : $group_ai,
+	'age'       => $php == 80 ? "2"          : 2,
 	'timestamp' => gmdate(_OP_DATE_TIME_),
 ];
 $ci->Set($method, $result, $args);
@@ -117,10 +120,10 @@ $where  = [];
 $option = [];
 $args   = [$qql, $where, $option];
 $result = [
-	'ai'        =>  "1",
+	'ai'        => $php == 80 ?  "1" : 1,
 	'name'      => 'OP',
-	'group'     =>  "1",
-	'age'       =>  "1",
+	'group'     => $php == 80 ?  "1" : 1,
+	'age'       => $php == 80 ?  "1" : 1,
 	'timestamp' => '2024-07-15 00:00:00',
 ];
 $ci->Set($method, $result, $args);
@@ -141,7 +144,7 @@ $where  = ' u.ai = 1 ';
 $option = [];
 $args   = [$qql, $where, $option];
 $result = [
-	'ai'        => "1",
+	'ai'        => $php == 80 ? "1" : 1,
 	'name'      => 'CI',
 	'group'     => 'OP',
 ];
@@ -154,10 +157,10 @@ $where  = ' t_user.ai = 1 ';
 $option = [];
 $args   = [$qql, $where, $option];
 $result = [
-	'ai'        =>  "1",
+	'ai'        => $php == 80 ? "1" : 1,
 	'name'      => 'OP',
-	'group'     =>  "1",
-	'age'       =>  "1",
+	'group'     => $php == 80 ? "1" : 1,
+	'age'       => $php == 80 ? "1" : 1,
 	'timestamp' => '2024-07-15 00:00:00',
 ];
 $ci->Set($method, $result, $args);
@@ -193,13 +196,17 @@ $option = [
 	'group' => 'group',
 ];
 $args   = [' count(*) <- t_user ', $where, $option];
-$result = ['count("*")' => "1"];
+$result = ['count("*")' => ($php == 80) ? "1" : 1 ];
 $ci->Set($method, $result, $args);
 
 //	...
 $method = 'Display';
 $args   = "t_user.ai = 1";
-$result = '<div class="qql records">[{"ai":"1","name":"CI","group":"1","age":"1","timestamp":"2024-07-25 09:00:00"}]</div>';
+if( $php == 80 ){
+	$result = '<div class="qql records">[{"ai":"1","name":"CI","group":"1","age":"1","timestamp":"2024-07-25 09:00:00"}]</div>';
+}else{
+	$result = '<div class="qql records">[{"ai":1,"name":"CI","group":1,"age":1,"timestamp":"2024-07-25 09:00:00"}]</div>';
+}
 $ci->Set($method, $result, $args);
 
 //	...
