@@ -17,6 +17,19 @@ declare(strict_types=1);
  */
 namespace OP;
 
+//	For CI
+if( OP()->isCI() ){
+	//	...
+	$file = 'QQL.sqlite3';
+	$path = OP()->Path("asset:/db/ci/{$file}");
+	//	...
+	if(!file_exists( $path ) ){
+		mkdir( OP()->Path('asset:/db/')    );
+		mkdir( OP()->Path('asset:/db/ci/') );
+		copy(__DIR__.'/'.$file, $path);
+	}
+}
+
 /* @var $ci UNIT\CI\CI_Config */
 $ci = OP::Unit('CI')::Config();
 
