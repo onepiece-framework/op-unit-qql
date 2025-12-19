@@ -24,9 +24,9 @@ if( OP()->isCI() ){
 	$path = OP()->Path("asset:/db/ci/{$file}");
 	//	...
 	if(!file_exists( $path ) ){
-		mkdir( OP()->Path('asset:/db/')    );
-		mkdir( OP()->Path('asset:/db/ci/') );
-		copy(__DIR__.'/'.$file, $path);
+		if(!file_exists($dir = OP()->Path("asset:/db"   ))){ mkdir($dir); }
+		if(!file_exists($dir = OP()->Path("asset:/db/ci"))){ mkdir($dir); }
+		copy(OP()->Path("asset:/unit/qql/{$file}"), $path);
 	}
 }
 
