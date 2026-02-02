@@ -64,27 +64,32 @@ class QQL implements IF_UNIT, IF_QQL
 	 */
 	static $_request;
 
-	/** Open database resource.
+	/**	Open database resource.
 	 *
 	 * @created    2024-07-13
-	 * @param      string     $dsn
+	 * @param      string|array $config
 	 * @return     string
 	 */
-	static public function Open(string $dsn='') : string
+	static public function Open(string|array $config='') : string
 	{
 		//	...
-		if( empty($dsn) ){
-			$dsn = OP()->Config('database');
+		if( empty($config) ){
+			$config = OP()->Config('database');
 		}
 
 		//	Convert to DSN from string.
-		if( is_string($dsn) ){
+		if( is_string($config) ){
+			/*
 			$dsn = include(__DIR__.'/include/DsnString.php');
+			*/
+			$dsn = $config;
 		}
 
 		//	Convert to DSN from array.
-		if( is_array($dsn) ){
+		if( is_array($config) ){
 			$dsn = include(__DIR__.'/include/DsnArray.php');
+			$username = $config['username'];
+			$password = $config['password'];
 		}
 
 		/*
@@ -107,7 +112,7 @@ class QQL implements IF_UNIT, IF_QQL
 
 		//	...
 		try{
-			self::$_PDOs[ self::$_hash ] = new \PDO($dsn);
+			self::$_PDOs[ self::$_hash ] = new \PDO($dsn, $username ?? null, $password ?? null);
 			self::$_PDOs[ self::$_hash ] -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		}catch( \PDOException $e ){
 			OP()->Notice( $e->getMessage() );

@@ -48,15 +48,15 @@ $ci->Set($method, $result, $args);
 $qql = OP()->Unit('QQL');
 
 //	...
-$path = 'ci/QQL.sqlite3';
-$hash = $qql->Open( $path );
+$dsn  = 'sqlite:'.$path;
+$hash = $qql->Open( $dsn );
 foreach($qql->Get(' sqlite_sequence ', [], ['limit'=>-1]) as $record){
 	$sequence[$record['name']] = $record['seq'];
 }
 
 //	...
 $method = 'Open';
-$args   = $path;
+$args   = $dsn;
 $result = $hash;
 $ci->Set($method, $result, $args);
 
