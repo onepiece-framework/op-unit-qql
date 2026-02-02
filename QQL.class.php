@@ -414,7 +414,7 @@ class QQL implements IF_QQL
 	static public function Debug()
 	{
 		//	...
-		if( \OP\Env::isCI() ){
+		if( OP()->isCI() ){
 			return;
 		}
 
