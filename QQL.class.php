@@ -4,7 +4,7 @@
  * @created    2024-07-12
  * @license    Apache-2.0
  * @package    op-unit-qql
- * @copyright  (C) 2024 Tomoaki Nagahara
+ * @copyright  Tomoaki Nagahara
  */
 
 /**	Declare strict type
@@ -20,7 +20,6 @@ namespace OP\UNIT;
 /**	Use
  *
  */
-use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_CI;
 use OP\IF_QQL;
@@ -29,7 +28,7 @@ use OP\IF_QQL;
  *
  * @created    2024-07-12
  */
-class QQL implements IF_UNIT, IF_QQL
+class QQL implements IF_QQL
 {
 	/**	Use
 	 *
