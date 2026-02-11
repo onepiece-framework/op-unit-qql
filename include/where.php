@@ -29,4 +29,4 @@ foreach( array_keys($where) as $key ){
 }
 
 //	...
-return join(', ', $join);
+return join(' AND ', $join);
