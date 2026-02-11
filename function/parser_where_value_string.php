@@ -38,7 +38,7 @@ function parser_where_value_string(string $where) : array
 	//	...
 	if(!$pos = strpos($where, ' ') ){
 		OP()->Notice("QQL format error: `{$where}`");
-		return [];
+		return [null,null,null];
 	}
 
 	//	...
