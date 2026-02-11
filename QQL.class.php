@@ -68,13 +68,17 @@ class QQL implements IF_UNIT, IF_QQL
 	 *
 	 * @created    2024-07-13
 	 * @param      string|array $config
-	 * @return     string
+	 * @return     string|false
 	 */
-	static public function Open(string|array $config='') : string
+	static public function Open(string|array $config='') : string | false
 	{
 		//	...
 		if( empty($config) ){
 			$config = OP()->Config('database');
+			if( empty($config) ){
+				OP()->Error("An asset:/config/database.php is empty.");
+				return false;
+			}
 		}
 
 		//	Convert to DSN from string.
