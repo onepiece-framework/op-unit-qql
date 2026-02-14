@@ -252,7 +252,6 @@ class QQL implements IF_QQL
 	 * @param      string     $qql
 	 * @param      array      $where
 	 * @param      array      $option
-	 * @return     array      $record
 	 */
 	static public function Get(string $qql, $where=null, $option=null, int $limit=1)
 	{
