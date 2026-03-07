@@ -330,7 +330,7 @@ class QQL implements IF_QQL
 		unset($get, $quote);
 
 		//	...
-		return $records ?? [];
+		return $records ?? (($option['limit'] == 1) ? null: []);
 	}
 
 	/** Display the records retrieved from the database in a table format.
