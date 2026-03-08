@@ -300,24 +300,12 @@ class QQL implements IF_QQL
 			];
 		}
 
-		//	...
+		//	An error is thrown.
 		try{
-
-		//	...
+		//	Fetch record
 		$stmt = self::$_PDOs[ self::$_hash ] -> prepare($sql);
 		$stmt -> execute( $where );
 		$records = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-		//	...
-		if( $option['limit'] == 1 ){
-			//	...
-			$records = $records[0] ?? [];
-
-			//	...
-			if( count($parsed['FIELDs'] ?? []) === 1 ){
-				$records = $records[ $parsed['FIELDs'][0] ] ?? null;
-			}
-		}
 
 		}catch( \PDOException $e ){
 			/*
@@ -326,11 +314,28 @@ class QQL implements IF_QQL
 			OP()->Notice($e);
 		}
 
-		//	...
+		//	It's for Eclipse warnings.
 		unset($get, $quote);
 
-		//	...
-		return $records ?? (($option['limit'] == 1) ? null: []);
+		//	If limit is 1 then return the first record.
+		if( $option['limit'] == 1 ){
+
+			//	Check if the limit is working.
+			if( count($records) >= 2 ){
+				OP()->Notice("The limit is not working.");
+			}
+
+			//	If only one field is specified, returns the value of that field value.
+			if( count($parsed['FIELDs'] ?? []) === 1 ){
+				return $records[0][ $parsed['FIELDs'][0] ] ?? null;
+			}
+
+			//	Return the first record.
+			return $records[0] ?? [];
+		}
+
+		//	Return the records.
+		return $records ?? [];
 	}
 
 	/** Display the records retrieved from the database in a table format.
