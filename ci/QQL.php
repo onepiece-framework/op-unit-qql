@@ -4,7 +4,7 @@
  * @created     2023-01-30
  * @license     Apache-2.0
  * @package     op-unit-qql
- * @copyright   (C) 2023 Tomoaki Nagahara
+ * @copyright   Tomoaki Nagahara
  */
 
 /**	Declare strict
@@ -36,6 +36,13 @@ $php = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
 /* @var $ci UNIT\CI\CI_Config */
 $ci = OP::Unit('CI')::Config();
 
+//	Include sub directory files.
+$name = basename(__FILE__);
+$name = explode('.', $name)[0];
+foreach( glob(__DIR__."/{$name}/*.php") as $path ){
+	require_once($path);
+}
+
 //	Template
 $method = 'Template';
 $arg1   = 'foo';
@@ -48,10 +55,18 @@ $ci->Set($method, $result, $args);
 $qql = OP()->Unit('QQL');
 
 //	...
+$file = 'QQL.sqlite3';
+$path = OP()->Path("asset:/db/ci/{$file}");
 $dsn  = 'sqlite:'.$path;
 $hash = $qql->Open( $dsn );
 foreach($qql->Get(' sqlite_sequence ', [], ['limit'=>-1]) as $record){
 	$sequence[$record['name']] = $record['seq'];
+}
+
+//	Check has error.
+if( OP()->Error()->Has() ){
+	D( OP()->Error()->Pop() );
+	return;
 }
 
 //	...
